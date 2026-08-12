@@ -22,6 +22,9 @@ from auth import (
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+@app.get("/api/health") 
+def health(): 
+    return {"status": "success"}
 
 # Security
 security = HTTPBearer()
