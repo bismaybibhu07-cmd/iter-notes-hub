@@ -26,20 +26,20 @@ function Admin() {
 
   // Load subjects
   const loadSubjects = async () => {
-    const res = await fetch('http://127.0.0.1:8000/subjects')
+    const res = await fetch('https://iter-notes-backend.onrender.com/subjects')
     const data = await res.json()
     setSubjects(data)
   }
 
   const loadNotes = async () => {
-    const res = await fetch('http://127.0.0.1:8000/notes')
+    const res = await fetch('https://iter-notes-backend.onrender.com/notes')
     const data = await res.json()
     setNotes(data)
   }
 
   // Load current user
   const loadUser = async () => {
-    const res = await fetch('http://127.0.0.1:8000/me', {
+    const res = await fetch('https://iter-notes-backend.onrender.com/me', {
       headers: {
         Authorization: `Bearer ${getToken()}`
       }
@@ -61,7 +61,7 @@ function Admin() {
   const addSubject = async (e) => {
     e.preventDefault()
 
-    await fetch('http://127.0.0.1:8000/subjects', {
+    await fetch('https://iter-notes-backend.onrender.com/subjects', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ function Admin() {
       formData.append('pdf', pdf)
     }
 
-    const res = await fetch('http://127.0.0.1:8000/notes', {
+    const res = await fetch('https://iter-notes-backend.onrender.com/notes', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${getToken()}`
@@ -134,7 +134,7 @@ function Admin() {
 
   // Delete subject
   const deleteSubject = async (id) => {
-    await fetch(`http://127.0.0.1:8000/subjects/${id}`, {
+    await fetch(`https://iter-notes-backend.onrender.com/subjects/${id}`, {
       method: 'DELETE'
     })
 
@@ -142,7 +142,7 @@ function Admin() {
   }
 
   const deleteNote = async (id) => {
-  await fetch(`http://127.0.0.1:8000/notes/${id}`, {
+  await fetch(`https://iter-notes-backend.onrender.com/notes/${id}`, {
     method: 'DELETE'
   })
 

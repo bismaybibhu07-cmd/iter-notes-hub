@@ -23,7 +23,7 @@ function Signup() {
     try {
 
       const res = await fetch(
-        'http://127.0.0.1:8000/signup',
+        'https://iter-notes-backend.onrender.com/signup',
         {
           method: 'POST',
           headers: {

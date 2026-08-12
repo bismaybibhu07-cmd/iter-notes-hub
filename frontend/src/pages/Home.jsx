@@ -9,7 +9,7 @@ function Home() {
 
   useEffect(() => {
 
-    fetch('http://127.0.0.1:8000/')
+    fetch('https://iter-notes-backend.onrender.com/')
       .then(response => response.json())
       .then(() => {
         setBackendStatus('Backend Connected')

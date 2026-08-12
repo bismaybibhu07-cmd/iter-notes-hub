@@ -10,7 +10,7 @@ function Subjects() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/subjects?branch=${branch}&semester=${semester}`)
+    fetch(`https://iter-notes-backend.onrender.com/subjects?branch=${branch}&semester=${semester}`)
       .then((res) => res.json())
       .then((data) => {
         setSubjects(data)

@@ -10,7 +10,7 @@ function Notes() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/notes?subject_id=${subjectId}`)
+    fetch(`https://iter-notes-backend.onrender.com/notes?subject_id=${subjectId}`)
       .then((res) => res.json())
       .then((data) => {
         setNotes(data)
@@ -50,7 +50,7 @@ function Notes() {
 
               <p>{note.content}</p>
 
-              {note.pdf_file && ( <div style={{ marginTop: '10px' }}> <a href={`http://127.0.0.1:8000${note.pdf_file}`} target="_blank" rel="noreferrer" className="download-btn" > 📖 Open PDF </a> <a href={`http://127.0.0.1:8000${note.pdf_file}`} download className="download-btn" style={{ marginLeft: '10px' }} > ⬇ Download </a> </div> )}
+              {note.pdf_file && ( <div style={{ marginTop: '10px' }}> <a href={`https://iter-notes-backend.onrender.com${note.pdf_file}`} target="_blank" rel="noreferrer" className="download-btn" > 📖 Open PDF </a> <a href={`https://iter-notes-backend.onrender.com${note.pdf_file}`} download className="download-btn" style={{ marginLeft: '10px' }} > ⬇ Download </a> </div> )}
 
             </div>
           ))
