@@ -9,14 +9,18 @@ function Home() {
 
   useEffect(() => {
 
-    fetch('https://iter-notes-backend.onrender.com/')
-      .then(response => response.json())
-      .then(() => {
-        setBackendStatus('Backend Connected')
-      })
-      .catch(() => {
-        setBackendStatus('Backend Not Connected')
-      })
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/health`)
+  .then(response => response.json())
+  .then((data) => {
+    if (data.status === 'success') {
+      setBackendStatus('Backend Connected')
+    } else {
+      setBackendStatus('Backend Not Connected')
+    }
+  })
+  .catch(() => {
+    setBackendStatus('Backend Not Connected')
+  })
 
   }, [])
 
