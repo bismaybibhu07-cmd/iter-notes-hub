@@ -1,3 +1,4 @@
+print("🔥 THIS MAIN.PY IS RUNNING ON RENDER")
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
