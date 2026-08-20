@@ -1,7 +1,76 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { logout, getToken } from '../auth/auth'
 import '../App.css'
+
+function CustomSelect({ value, onChange, options, placeholder }) {
+  const [open, setOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  const selectedOption = options.find(
+    (option) => String(option.value) === String(value)
+  )
+
+  return (
+    <div className="custom-select" ref={dropdownRef}>
+
+      <button
+        type="button"
+        className="custom-select-button"
+        onClick={() => setOpen(!open)}
+      >
+        <span>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
+
+        <span className={`custom-select-arrow ${open ? 'open' : ''}`}>
+          ▾
+        </span>
+      </button>
+
+      {open && (
+        <div className="custom-select-menu">
+
+          {options.map((option) => (
+            <div
+              key={option.value}
+              className={`custom-select-option ${
+                String(option.value) === String(value)
+                  ? 'selected'
+                  : ''
+              }`}
+              onClick={() => {
+                onChange(option.value)
+                setOpen(false)
+              }}
+            >
+              {option.label}
+            </div>
+          ))}
+
+        </div>
+      )}
+
+    </div>
+  )
+}
 
 function Admin() {
   const navigate = useNavigate()
@@ -203,20 +272,22 @@ function Admin() {
               }
             />
 
-            <select
-              value={subjectForm.branch}
-              onChange={(e) =>
-                setSubjectForm({
-                  ...subjectForm,
-                  branch: e.target.value
-                })
-              }
-            >
-              <option>CSE</option>
-              <option>ECE</option>
-              <option>EEE</option>
-              <option>ME</option>
-            </select>
+            <CustomSelect
+  value={subjectForm.branch}
+  onChange={(value) =>
+    setSubjectForm({
+      ...subjectForm,
+      branch: value
+    })
+  }
+  options={[
+    { value: 'CSE', label: 'CSE' },
+    { value: 'ECE', label: 'ECE' },
+    { value: 'EEE', label: 'EEE' },
+    { value: 'ME', label: 'ME' }
+  ]}
+  placeholder="Select Branch"
+/>
 
             <input
               type="number"
@@ -266,28 +337,20 @@ function Admin() {
               }
             />
 
-            <select
-              value={noteForm.subject_id}
-              onChange={(e) =>
-                setNoteForm({
-                  ...noteForm,
-                  subject_id: e.target.value
-                })
-              }
-            >
-
-              <option value="">
-                Select Subject
-              </option>
-
-              {subjects.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.branch} Sem {s.semester} - {s.name}
-                </option>
-              ))}
-
-            </select>
-
+            <CustomSelect
+  value={noteForm.subject_id}
+  onChange={(value) =>
+    setNoteForm({
+      ...noteForm,
+      subject_id: value
+    })
+  }
+  options={subjects.map((s) => ({
+    value: s.id,
+    label: `${s.branch} Sem ${s.semester} - ${s.name}`
+  }))}
+  placeholder="Select Subject"
+/>
             <input
               type="file"
               accept=".pdf"
@@ -330,8 +393,7 @@ function Admin() {
           </div>
         ))}
 
-        {notes .filter((n) => n.subject_id === s.id) .map((n) => ( <div key={n.id} style={{ marginLeft: '20px', marginBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f8fafc', padding: '8px 12px', borderRadius: '8px' }} > <span> 📄 {n.title} </span> <button onClick={() => deleteNote(n.id)} style={{ background: '#ef4444' }} > Delete Note </button> </div> ))}
-
+        
       </div>
 
     </div>

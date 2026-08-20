@@ -162,3 +162,110 @@ h1, h2 { color: white; }
   text-underline-offset: 4px;
   color: white;
 }
+/* =========================
+   CUSTOM DROPDOWN
+========================= */
+
+.custom-select {
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.custom-select-button {
+  width: 100%;
+  min-height: 58px;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.10);
+  color: white;
+
+  font-size: 17px;
+  font-family: inherit;
+
+  cursor: pointer;
+  text-align: left;
+
+  transition: 0.2s ease;
+}
+
+.custom-select-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.custom-select-arrow {
+  font-size: 22px;
+  transition: transform 0.2s ease;
+}
+
+.custom-select-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu */
+
+.custom-select-menu {
+  position: absolute;
+
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+
+  background: white;
+
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+  z-index: 9999;
+
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+/* Every option */
+
+.custom-select-option {
+  padding: 13px 18px;
+
+  background: white;
+  color: black;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition: background 0.15s ease;
+}
+
+/* Hover */
+
+.custom-select-option:hover {
+  background: #e5e7eb;
+  color: black;
+}
+
+/* Selected option */
+
+.custom-select-option.selected {
+  background: #f3f4f6;
+  color: black;
+  font-weight: 600;
+}
+
+/* Selected option hover */
+
+.custom-select-option.selected:hover {
+  background: #e5e7eb;
+  color: black;
+}
